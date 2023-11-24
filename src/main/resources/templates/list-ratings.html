@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ratings List</title>
+    <!-- Include Materialize CSS -->
+    <link th:href="@{/webjars/materialize/1.0.0/css/materialize.min.css}" rel="stylesheet"/>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Ratings</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/ratings/add">Add New Rating</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3>Ratings</h3>
+        <a href="/ratings/add" class="waves-effect waves-light btn">Add New Rating</a>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Score</th>
+                    <th>Movie</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="rating : ${ratings}">
+                    <td th:text="${rating.score}">Score</td>
+                    <td th:text="${rating.movie.title}">Movie Title</td>
+                    <td>
+                        <a th:href="@{/ratings/delete/{id}(id=${rating.id})}" class="waves-effect waves-light btn" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Materialize JS and jQuery -->
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/materialize/1.0.0/js/materialize.min.js}"></script>
+    <script>
+        // Initialize Materialize components
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+        });
+    </script>
+</body>
+</html>

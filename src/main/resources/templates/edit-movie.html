@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Movie</title>
+    <!-- Include Materialize CSS -->
+    <link th:href="@{/webjars/materialize/1.0.0/css/materialize.min.css}" rel="stylesheet"/>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Edit Movie</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/movies">Back to Movies List</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h3>Edit Movie</h3>
+        <form th:action="@{/movies/{id}(id=${movie.id})}" th:object="${movie}" method="post" class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" id="title" name="title" th:field="*{title}" required />
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="description" name="description" th:field="*{description}" class="materialize-textarea" required></textarea>
+                    <label for="description">Description</label>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Update Movie
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Include Materialize JS and jQuery -->
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/materialize/1.0.0/js/materialize.min.js}"></script>
+    <script>
+        // Initialize Materialize components
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+        });
+    </script>
+</body>
+</html>
